@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  db:
+    image: postgres:9.6.9-alpine
+    environment:
+      POSTGRES_USER: phoneflag
+      POSTGRES_PASSWORD: phoneflag
+      POSTGRES_DB: phoneflag
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
