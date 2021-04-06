@@ -3,10 +3,22 @@ from django.contrib.auth import login, logout, authenticate
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer, VendorSerializer, DeviceOwnerSerializer, LoginSerializer
 from .models import User, Vendor, DeviceOwner
+
+
+class VendorSignUpViewSet(ModelViewSet):
+    serializer_class = VendorSerializer
+    queryset = Vendor.objects.all()
+
+
+class DeviceOwnerSignUpViewSet(ModelViewSet):
+    serializer_class = DeviceOwnerSerializer
+    queryset = DeviceOwner.objects.all()
+
 
 class LoginView(APIView):
     serializer_class = LoginSerializer
