@@ -7,17 +7,24 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        exclude = ('password','groups','user_permissions')
+        # fields = '__all__'
+        exclude = ['last_login', 'active', 'staff', 'admin']
 
 
-class VendorSerializer(serializers.Serializer):
+class VendorSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Vendor
+        # fields = '__all__'
+        exclude = ['id']
 
 
-class DeviceOwnerSerializer(serializers.Serializer):
+class DeviceOwnerSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = DeviceOwner
+        # fields = '__all__'
+        exclude = ['id']
